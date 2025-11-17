@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>365 Giorni Potenzianti</title>
+  <meta name="description" content="Una citazione potenziante ogni giorno, per 365 giorni.">
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #0f172a; /* blu notte */
+      color: #e5e7eb;      /* grigio chiaro */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 480px;
+      border-radius: 24px;
+      padding: 20px 18px 16px;
+      background: radial-gradient(circle at top, #1d4ed8, #020617);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #bfdbfe;
+      margin-bottom: 4px;
+    }
+
+    header p {
+      font-size: 0.9rem;
+      color: #cbd5f5;
+      opacity: 0.9;
+    }
+
+    .date {
+      text-align: center;
+      font-size: 0.9rem;
+      text-transform: capitalize;
+      color: #a5b4fc;
+      margin-bottom: 12px;
+    }
+
+    .quote-card {
+      background: rgba(15,23,42,0.8);
+      border-radius: 18px;
+      padding: 16px 14px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(129,140,248,0.4);
+      margin-bottom: 10px;
+    }
+
+    .quote-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+      opacity: 0.4;
+      margin-bottom: 8px;
+    }
+
+    .quote-text {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .quote-author {
+      text-align: right;
+      font-size: 0.9rem;
+      color: #93c5fd;
+      font-weight: 500;
+    }
+
+    .quote-note {
+      font-size: 0.85rem;
+      color: #e5e7eb;
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+
+    .quote-note span {
+      opacity: 0.7;
+    }
+
+    footer {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #9ca3af;
+      opacity: 0.8;
+    }
+
+    footer strong {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>365 Giorni Potenzianti</h1>
+      <p>Una frase al giorno per ricordarti chi puoi diventare.</p>
+    </header>
+
+    <p id="date-label" class="date"></p>
+
+    <section class="quote-card">
+      <div class="quote-icon">“</div>
+      <p id="quote-text" class="quote-text">
+        <!-- Qui lo script inserirà il testo della citazione -->
+      </p>
+      <p id="quote-author" class="quote-author">
+        <!-- Qui lo script inserirà l'autore -->
+      </p>
+    </section>
+
+    <p id="quote-note" class="quote-note">
+      <!-- Qui lo script inserirà il micro-spunto di riflessione -->
+    </p>
+
+    <footer>
+      <span>Creato con <span aria-hidden="true">♥</span> per accompagnarti ogni giorno.</span><br>
+      <!-- Puoi personalizzare: il tuo nome, “Wakeify”, ecc. -->
+      <strong>by You</strong>
+    </footer>
+  </div>
+
+  <script>
+    // ==============================
+    // 1. QUI METTI LE TUE CITAZIONI
+    // ==============================
+    // Ogni oggetto rappresenta 1 giorno.
+    // Quando avrai 365 citazioni, ogni giorno dell'anno avrà la sua.
+    // Per ora ti metto alcuni esempi (puoi cambiarli tutti):
+
+    const quotes = [
+      {
+        text: "Il futuro dipende da ciò che fai oggi.",
+        author: "Mahatma Gandhi",
+        note: "Oggi fai almeno un'azione minuscola che il tuo 'io futuro' ti ringrazierà."
+      },
+      {
+        text: "Non è mai troppo tardi per essere ciò che avresti potuto essere.",
+        author: "George Eliot",
+        note: "Pensa a un ruolo o un progetto che ti ispira: qual è il micro-passaggio 0,5 che puoi fare oggi?"
+      },
+      {
+        text: "Agisci come se ciò che fai facesse la differenza. Perché lo fa.",
+        author: "William James",
+        note: "Osserva una tua scelta di oggi e chiediti: che impatto ha su di me tra un anno?"
+      },
+      {
+        text: "Non puoi tornare indietro e cambiare l'inizio, ma puoi iniziare dove sei e cambiare il finale.",
+        author: "C.S. Lewis",
+        note: "Individua un ambito della tua vita in cui vuoi cambiare finale. Da dove puoi iniziare concretamente adesso?"
+      },
+      {
+        text: "La vita non è aspettare che passi la tempesta, ma imparare a ballare sotto la pioggia.",
+        author: "Vivian Greene",
+        note: "Qual è la 'pioggia' attuale nella tua vita? Cerca un modo per ballarci dentro invece di aspettare che finisca."
+      },
+      {
+        text: "La disciplina è la scelta tra ciò che vuoi ora e ciò che vuoi di più.",
+        author: "Abraham Lincoln (attrib.)",
+        note: "Guarda una tua tentazione di oggi e chiediti: mi avvicina al mio 'di più' o me ne allontana?"
+      },
+      {
+        text: "Non siamo mai troppo vecchi per fissare un nuovo obiettivo o per sognare un nuovo sogno.",
+        author: "C.S. Lewis",
+        note: "Scrivi un obiettivo che non ti sei mai concesso davvero di dichiarare. Anche solo per te."
+      },
+      {
+        text: "Il coraggio non è l’assenza di paura, ma la decisione che qualcosa è più importante della paura.",
+        author: "Ambrose Redmoon",
+        note: "Identifica qualcosa per cui vale la pena avere paura e farlo comunque, anche in piccolo."
+      },
+      {
+        text: "Ogni giorno ti è data una nuova vita in miniatura.",
+        author: "Proverbio (adatt.)",
+        note: "Se oggi fosse un 'trailer' della tua vita intera, cosa vorresti che si vedesse?"
+      },
+      {
+        text: "Non puoi attraversare il mare stando fermo e fissando l’acqua.",
+        author: "Rabindranath Tagore",
+        note: "Qual è una decisione che rimandi da tempo? Fai oggi il primo passo visibile, anche minimo."
+      },
+      {
+        text: "Ciò che otteniamo diventando, è più importante di ciò che otteniamo raggiungendo.",
+        author: "Jim Rohn",
+        note: "Non chiederti solo 'cosa voglio ottenere?', ma anche 'chi sto diventando mentre ci provo?'."
+      },
+      {
+        text: "Non è la montagna che conquisti, ma te stesso.",
+        author: "Sir Edmund Hillary",
+        note: "Guarda una sfida di oggi e domandati: quale versione migliore di me sta cercando di nascere attraverso questa fatica?"
+      }
+    ];
+
+    // ===================================================
+    // 2. CALCOLA IL GIORNO DELL'ANNO E SCEGLI LA CITAZIONE
+    // ===================================================
+
+    /**
+     * Restituisce il numero del giorno dell'anno (1–366)
+     * @param {Date} date
+     * @returns {number}
+     */
+    function getDayOfYear(date) {
+      const start = new Date(date.getFullYear(), 0, 0); // 0 gennaio (base)
+      const diff = date - start;
+      const oneDay = 1000 * 60 * 60 * 24;
+      return Math.floor(diff / oneDay); // 1, 2, 3, ..., 365 (o 366)
+    }
+
+    /**
+     * Mostra la citazione corrispondente alla data di oggi.
+     * Per ora, se ci sono meno di 365 citazioni, il sistema 'gira' nell'array con il modulo.
+     * Quando avrai 365 voci, ogni giorno sarà unico.
+     */
+    function showQuoteForToday() {
+      const today = new Date();
+
+      // Impostiamo la data in italiano esteso: lunedì 17 novembre 2025
+      const dateLabel = today.toLocaleDateString("it-IT", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+
+      const dayOfYear = getDayOfYear(today); // 1–366
+
+      // Se hai 365 citazioni, l'indice sarà 0–364.
+      // Usare il modulo permette all'app di funzionare anche se per ora hai meno citazioni.
+      const index = (dayOfYear - 1) % quotes.length;
+      const quote = quotes[index];
+
+      // Inserimento nei nodi HTML
+      document.getElementById("date-label").textContent = dateLabel;
+      document.getElementById("quote-text").textContent = quote.text;
+      document.getElementById("quote-author").textContent = "— " + quote.author;
+      document.getElementById("quote-note").innerHTML =
+        "<span>Spunto del giorno:</span> " + quote.note;
+    }
+
+    document.addEventListener("DOMContentLoaded", showQuoteForToday);
+  </script>
+</body>
+</html>
